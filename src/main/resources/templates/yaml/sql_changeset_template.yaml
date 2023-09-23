@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: ${id}
+      author: ${author}
+      dbms: ${dbms}
+      changes:
+        - sql:
+            sql:
+      rollback:
+        - sql:
+            sql:
