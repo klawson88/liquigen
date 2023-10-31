@@ -14,14 +14,14 @@ class GenerateChangeLogTaskOptionUtilsSpec: DescribeSpec({
             val timestampGenerator = createTimestampGeneratorForFormatOption("epoch")
 
             timestampGenerator.shouldNotBeNull()
-            timestampGenerator!!.shouldBeTypeOf<TimestampGenerator.EpochTimestamp>()
+            timestampGenerator.shouldBeTypeOf<TimestampGenerator.EpochTimestamp>()
         }
 
         it("returns a TimestampGenerator.DateTimeTimestamp when timestampFormat is a date time format string") {
             val timestampGenerator = createTimestampGeneratorForFormatOption("yyyy-MM-dd")
 
             timestampGenerator.shouldNotBeNull()
-            timestampGenerator!!.shouldBeTypeOf<TimestampGenerator.DateTimeTimestamp>()
+            timestampGenerator.shouldBeTypeOf<TimestampGenerator.DateTimeTimestamp>()
         }
     }
 
@@ -38,7 +38,7 @@ class GenerateChangeLogTaskOptionUtilsSpec: DescribeSpec({
                     .map{"${it.key}=${it.value}"}
                     .joinToString(";")
 
-            val actualTemplateParamNamesAndValues = parseTemplateParamsOption(templateParamsPropertiesStr);
+            val actualTemplateParamNamesAndValues = parseTemplateParamsOption(templateParamsPropertiesStr)
 
             actualTemplateParamNamesAndValues.shouldBeEqual(expectedTemplateParamNamesAndValues)
         }

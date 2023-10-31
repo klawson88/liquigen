@@ -4,5 +4,5 @@ import com._16minutes.liquigen.settings.LiquigenExtension
 import java.io.File
 
 interface Generator {
-    fun generate(extension: LiquigenExtension): File;
+    fun generate(extension: LiquigenExtension): File
 }

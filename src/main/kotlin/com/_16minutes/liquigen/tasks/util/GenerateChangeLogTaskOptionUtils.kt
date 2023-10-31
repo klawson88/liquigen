@@ -2,7 +2,7 @@ package com._16minutes.liquigen.tasks.util
 
 import com._16minutes.liquigen.generators.timestamp.TimestampGenerator
 
-fun createTimestampGeneratorForFormatOption(timestampFormat: String): TimestampGenerator? {
+fun createTimestampGeneratorForFormatOption(timestampFormat: String): TimestampGenerator {
     return when (timestampFormat) {
         "epoch" -> TimestampGenerator.EpochTimestamp()
         else -> {
