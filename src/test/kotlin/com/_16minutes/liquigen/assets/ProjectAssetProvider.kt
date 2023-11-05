@@ -18,7 +18,7 @@ class ProjectAssetProvider(assetGroupId: String) {
             import com._16minutes.liquigen.settings.LiquigenExtension
             
             plugins {
-                id("com._16minutes.liquigen")
+                id("io.github.klawson88.liquigen")
             }
         """.trimIndent()
 

@@ -6,7 +6,7 @@ plugins {
     `java-gradle-plugin`
 }
 
-group = "com._16minutes"
+group = "io.github.klawson88"
 version = "1.0"
 
 gradlePlugin {
@@ -14,7 +14,7 @@ gradlePlugin {
         create("liquigen") {
             val pluginNamePackageFormat = name.replace("-", "_")
 
-            id = "com._16minutes.liquigen"
+            id = "io.github.klawson88.liquigen"
             implementationClass = "com._16minutes.liquigen.Liquigen"
             displayName = "Liquigen"
             description = """A plugin which provides the ability to generate Liquibase
