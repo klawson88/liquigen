@@ -1,6 +1,7 @@
 package com._16minutes.liquigen.settings
 
 import com._16minutes.liquigen.generators.timestamp.TimestampGenerator
+import java.io.File
 
 open class LiquigenExtension(
     val fileSettings: FileSettings,
@@ -92,7 +93,8 @@ open class LiquigenExtension(
                 "author" to "",
                 "dbms" to ""
             )
-            val TEMPLATE_PATH: String = this.javaClass.getResource("/templates/yaml/sql_changeset_template.yaml").path
+            val TEMPLATE_PATH: String =
+                File(this.javaClass.getResource("/templates/yaml/sql_changeset_template.yaml").toURI()).absolutePath
         }
 
         lateinit var templateParamInterpolationToken: String
