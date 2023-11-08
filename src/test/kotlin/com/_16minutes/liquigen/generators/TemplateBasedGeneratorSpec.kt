@@ -169,7 +169,7 @@ class TemplateBasedGeneratorSpec: DescribeSpec({
                     .joinToString(LiquigenExtension.FileSettings.Defaults.FILE_NAME_DELIMITER)
             val expectedFilePath = Path.of(outputDirectoryPath, expectedFileName).toString()
 
-            val file = TemplateBasedGenerator().generate(liquigenExtension)
+            val file = TemplateBasedGenerator().generate(liquigenExtension, null)
 
             performFileSettingsMockVerifications(fileSettings)
             performTemplateSettingsMockVerification(templateSettings)
@@ -206,7 +206,7 @@ class TemplateBasedGeneratorSpec: DescribeSpec({
             )
             val liquigenExtension = createLiquigenExtensionMockForTest(fileSettings, templateSettings)
 
-            val file = TemplateBasedGenerator().generate(liquigenExtension)
+            val file = TemplateBasedGenerator().generate(liquigenExtension, null)
 
             performFileSettingsMockVerifications(fileSettings)
             performTemplateSettingsMockVerification(templateSettings)
@@ -258,7 +258,7 @@ class TemplateBasedGeneratorSpec: DescribeSpec({
                                 sql:
             """.trimIndent()
 
-            val file = TemplateBasedGenerator().generate(liquigenExtension)
+            val file = TemplateBasedGenerator().generate(liquigenExtension, null)
 
             performFileSettingsMockVerifications(fileSettings)
             performTemplateSettingsMockVerification(templateSettings)

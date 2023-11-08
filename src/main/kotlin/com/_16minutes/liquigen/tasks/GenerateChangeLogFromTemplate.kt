@@ -74,6 +74,6 @@ open class GenerateChangeLogFromTemplate @Inject constructor (
     fun execute() {
         mergeFileSettingsOptionsIntoExtension()
         mergeTemplateSettingsOptionsIntoExtension()
-        generator.generate(liquigenExtension)
+        generator.generate(liquigenExtension, project.projectDir)
     }
 }

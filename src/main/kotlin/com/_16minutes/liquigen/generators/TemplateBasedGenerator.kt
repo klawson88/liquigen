@@ -5,6 +5,7 @@ import com._16minutes.liquigen.util.createTokenRegex
 import com._16minutes.liquigen.util.procureFullFileName
 import java.io.File
 import java.nio.file.Path
+import java.nio.file.Paths
 import java.util.regex.Pattern
 
 class TemplateBasedGenerator: Generator {
@@ -26,20 +27,36 @@ class TemplateBasedGenerator: Generator {
     }
 
 
-    override fun generate(liquigenExtension: LiquigenExtension): File {
+    override fun generate(liquigenExtension: LiquigenExtension, relativePathParentDirectory: File?): File {
         val extensionTemplateSettings = liquigenExtension.templateSettings
         val tokenPattern = Pattern.compile(createTokenRegex(extensionTemplateSettings.templateParamInterpolationToken))
         val tokenValuesByParam = extensionTemplateSettings.templateParamNamesAndValues
 
-        val templateFileContent = File(extensionTemplateSettings.templatePath).readText()
+        val relativePathParentDirectoryPath = relativePathParentDirectory?.absolutePath ?: ""
+
+        val effectiveTemplatePath =
+            Paths
+                .get(relativePathParentDirectoryPath)
+                .resolve(extensionTemplateSettings.templatePath)
+                .normalize()
+                .toString()
+
+        val templateFileContent = File(effectiveTemplatePath).readText()
         val outputFileContent =
             tokenPattern
                 .matcher(templateFileContent)
                 .replaceAll { tokenValuesByParam[it.group(1)].toString() }
 
+        val effectiveOutputDirectoryPath =
+            Paths
+                .get(relativePathParentDirectoryPath)
+                .resolve(liquigenExtension.fileSettings.outputDirectoryPath)
+                .normalize()
+                .toString()
+
         val outputFile =
             Path
-                .of(liquigenExtension.fileSettings.outputDirectoryPath, procureFileNameWithExtension(liquigenExtension))
+                .of(effectiveOutputDirectoryPath, procureFileNameWithExtension(liquigenExtension))
                 .toFile()
 
         val outputWriter = outputFile.bufferedWriter()
