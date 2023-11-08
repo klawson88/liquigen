@@ -74,6 +74,11 @@ open class GenerateChangeLogFromTemplate @Inject constructor (
     fun execute() {
         mergeFileSettingsOptionsIntoExtension()
         mergeTemplateSettingsOptionsIntoExtension()
-        generator.generate(liquigenExtension, project.projectDir)
+
+        project.logger.debug("Effective liquigenExtension for task ${this.name} is: $liquigenExtension")
+
+        val generatedChangelog = generator.generate(liquigenExtension, project.projectDir)
+
+        project.logger.info("Generated changelog ${generatedChangelog.absolutePath}")
     }
 }
