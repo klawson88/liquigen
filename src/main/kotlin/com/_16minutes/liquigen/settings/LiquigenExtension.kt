@@ -94,7 +94,7 @@ open class LiquigenExtension(
                 "dbms" to ""
             )
             val TEMPLATE_PATH: String =
-                File(this.javaClass.getResource("/templates/yaml/sql_changeset_template.yaml").toURI()).absolutePath
+                File(this.javaClass.getResource("/templates/yaml/sql_changeset_template.yaml").toURI()).canonicalPath
         }
 
         lateinit var templateParamInterpolationToken: String
