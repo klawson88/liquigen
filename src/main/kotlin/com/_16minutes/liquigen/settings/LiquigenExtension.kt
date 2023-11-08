@@ -2,6 +2,7 @@ package com._16minutes.liquigen.settings
 
 import com._16minutes.liquigen.generators.timestamp.TimestampGenerator
 import java.io.File
+import java.nio.file.Files
 
 open class LiquigenExtension(
     val fileSettings: FileSettings,
@@ -85,7 +86,27 @@ open class LiquigenExtension(
 
         companion object {
             const val PARAM_PLACEHOLDER = "param"
+
+            var DEFAULT_TEMPLATE_PATH: String
+
+            init {
+                val defaultTemplateFileInputStream =
+                    this.javaClass.getResourceAsStream("/templates/yaml/sql_changeset_template.yaml")
+
+                val tempTemplateFile = Files.createTempFile("sql_changeset_template", ".yml").toFile()
+
+                tempTemplateFile.deleteOnExit()
+
+                defaultTemplateFileInputStream.use { inputStream ->
+                    tempTemplateFile.outputStream().use {outputStream ->
+                        inputStream.transferTo(outputStream)
+                    }
+                }
+
+                DEFAULT_TEMPLATE_PATH = tempTemplateFile.absolutePath
+            }
         }
+
         object Defaults {
             const val PARAM_INTERPOLATION_TOKEN = "\${$PARAM_PLACEHOLDER}"
             val TEMPLATE_PARAM_NAMES_AND_VALUES = mapOf(
@@ -93,8 +114,6 @@ open class LiquigenExtension(
                 "author" to "",
                 "dbms" to ""
             )
-            val TEMPLATE_PATH: String =
-                File(this.javaClass.getResource("/templates/yaml/sql_changeset_template.yaml").toURI()).canonicalPath
         }
 
         lateinit var templateParamInterpolationToken: String
@@ -120,7 +139,7 @@ open class LiquigenExtension(
             }
 
             if (!::templatePath.isInitialized) {
-                templatePath = Defaults.TEMPLATE_PATH
+                templatePath = DEFAULT_TEMPLATE_PATH
             }
         }
 

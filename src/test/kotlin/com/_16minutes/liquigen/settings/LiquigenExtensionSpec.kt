@@ -56,7 +56,7 @@ class LiquigenExtensionSpec : DescribeSpec({
                         .templateParamInterpolationToken
                         .shouldBe(LiquigenExtension.TemplateSettings.Defaults.PARAM_INTERPOLATION_TOKEN)
                     cut.templateParamNamesAndValues.shouldBe(LiquigenExtension.TemplateSettings.Defaults.TEMPLATE_PARAM_NAMES_AND_VALUES)
-                    cut.templatePath.shouldBe(LiquigenExtension.TemplateSettings.Defaults.TEMPLATE_PATH)
+                    cut.templatePath.shouldBe(LiquigenExtension.TemplateSettings.DEFAULT_TEMPLATE_PATH)
                 }
 
                 it("preserves initialized property values") {
