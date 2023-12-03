@@ -17,8 +17,12 @@ plugins {
     id("nu.studer.credentials").version("3.0")
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 group = "io.github.klawson88"
-version = "1.1.4"
+version = "1.2.4"
 
 gradlePlugin {
     plugins {
